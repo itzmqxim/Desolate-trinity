@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6bnhd1wfrh2o"]
+
+[ext_resource type="Texture2D" uid="uid://4foleekvvr7y" path="res://Assets/Effects/wall.png" id="1_nt58x"]
+[ext_resource type="Script" uid="uid://0yk4n74uu6tt" path="res://Scripts/World/tilemap_wall.gd" id="2_ea1mw"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_426m0"]
+texture = ExtResource("1_nt58x")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_0g06u"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_426m0")
+
+[node name="TileMapLayer" type="TileMapLayer"]
+tile_set = SubResource("TileSet_0g06u")
+script = ExtResource("2_ea1mw")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]

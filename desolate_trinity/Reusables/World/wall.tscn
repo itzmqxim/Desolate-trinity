@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5titvfeuf05a"]
+
+[ext_resource type="Script" uid="uid://ci36gtqqkj833" path="res://Scripts/World/wall.gd" id="1_yfkhh"]
+[ext_resource type="Texture2D" uid="uid://duor1te8qiyva" path="res://Assets/Atlases/color.png" id="2_yfkhh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5u4un"]
+size = Vector2(16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xntwl"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[node name="Wall" type="StaticBody2D"]
+z_index = 2
+script = ExtResource("1_yfkhh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5u4un")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_yfkhh")
+region_enabled = true
+region_rect = Rect2(80, 80, 16, 16)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_xntwl")
