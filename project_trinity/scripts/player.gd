@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var slide_factor := 0.85
 @export var dash_speed := 800.0
 @export var dash_duration := 0.3
-@export var dash_cooldown := 6.0
+@export var dash_cooldown := 6.5
 @export var speed_boost_scene := "res://maps/map_abstract.tscn"
 @export var boosted_speed := 500.0
 
