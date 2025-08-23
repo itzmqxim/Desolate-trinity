@@ -1,0 +1,149 @@
+[gd_scene load_steps=11 format=3 uid="uid://g5uraec16rec"]
+
+[ext_resource type="PackedScene" uid="uid://bqm3gmjipkf7p" path="res://reusables/audio_slider.tscn" id="1_1n0cb"]
+[ext_resource type="Script" uid="uid://dpicvbae88crq" path="res://UI/scripts/settings.gd" id="1_vjvtm"]
+[ext_resource type="PackedScene" uid="uid://shfmjpab4m60" path="res://reusables/fade_dark.tscn" id="3_dqwf6"]
+[ext_resource type="Script" uid="uid://bdaeu6td51mvy" path="res://UI/scripts/settings_bg.gd" id="4_nqmmb"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_q8p5w"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_dqwf6"]
+events = [SubResource("InputEventKey_q8p5w")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_ud1ve"]
+device = -1
+keycode = 4194306
+
+[sub_resource type="Shortcut" id="Shortcut_nqmmb"]
+events = [SubResource("InputEventKey_ud1ve")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_vv747"]
+device = -1
+keycode = 82
+unicode = 114
+
+[sub_resource type="Shortcut" id="Shortcut_th1c4"]
+events = [SubResource("InputEventKey_vv747")]
+
+[node name="Settings" type="Node2D"]
+script = ExtResource("1_vjvtm")
+
+[node name="fade_dark" parent="." instance=ExtResource("3_dqwf6")]
+visible = false
+z_index = 100
+offset_left = -121.0
+offset_top = -59.0
+offset_right = 647.0
+offset_bottom = 373.0
+scale = Vector2(1.8, 1.8)
+
+[node name="Fadetimer" type="Timer" parent="fade_dark"]
+wait_time = 0.5
+
+[node name="ColorRect" type="ColorRect" parent="."]
+clip_children = 2
+light_mask = 0
+z_index = -110
+z_as_relative = false
+offset_right = 576.0
+offset_bottom = 648.0
+color = Color(0.294118, 0.498039, 0.682353, 1)
+script = ExtResource("4_nqmmb")
+cycle_speed = 5.0
+base_color = "#4b7fae"
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+clip_children = 2
+light_mask = 0
+z_index = -110
+z_as_relative = false
+offset_left = 576.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.234129, 0.416844, 0.580893, 1)
+script = ExtResource("4_nqmmb")
+cycle_speed = 5.0
+base_color = "#4b7fae"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 714.0
+offset_top = 168.0
+offset_right = 754.0
+offset_bottom = 224.0
+scale = Vector2(3, 3)
+
+[node name="HSlider" parent="VBoxContainer" instance=ExtResource("1_1n0cb")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="Label" type="Label" parent="VBoxContainer/HSlider"]
+layout_mode = 0
+offset_left = -24.0
+offset_top = 2.5
+offset_right = 22.0
+offset_bottom = 25.5
+scale = Vector2(0.5, 0.5)
+text = "Music"
+
+[node name="HSlider2" parent="VBoxContainer" instance=ExtResource("1_1n0cb")]
+layout_mode = 2
+script = null
+
+[node name="Label" type="Label" parent="VBoxContainer/HSlider2"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 2.5
+offset_right = 30.0
+offset_bottom = 25.5
+scale = Vector2(0.5, 0.5)
+text = "SFX"
+
+[node name="HSlider3" parent="VBoxContainer" instance=ExtResource("1_1n0cb")]
+layout_mode = 2
+script = null
+
+[node name="Label" type="Label" parent="VBoxContainer/HSlider3"]
+layout_mode = 0
+offset_left = -34.0
+offset_top = 2.5
+offset_right = 32.0
+offset_bottom = 25.5
+scale = Vector2(0.5, 0.5)
+text = "Ambient"
+
+[node name="Return" type="Button" parent="."]
+z_index = 5
+layout_direction = 2
+offset_top = 2.0
+offset_right = 256.0
+offset_bottom = 66.0
+size_flags_horizontal = 3
+shortcut = SubResource("Shortcut_dqwf6")
+text = "Return"
+
+[node name="Settings" type="Button" parent="."]
+z_index = 5
+offset_left = 514.0
+offset_top = 2.0
+offset_right = 770.0
+offset_bottom = 66.0
+size_flags_horizontal = 3
+shortcut = SubResource("Shortcut_nqmmb")
+text = "Settings"
+
+[node name="Reset" type="Button" parent="."]
+z_index = 5
+offset_left = 1069.0
+offset_top = 2.0
+offset_right = 1325.0
+offset_bottom = 66.0
+size_flags_horizontal = 3
+shortcut = SubResource("Shortcut_th1c4")
+text = "Reset"
+
+[connection signal="timeout" from="fade_dark/Fadetimer" to="." method="_on_fadetimer_timeout"]
+[connection signal="pressed" from="Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Reset" to="." method="_on_reset_pressed"]
